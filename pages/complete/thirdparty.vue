@@ -1,0 +1,738 @@
+<template>
+  <div>
+    <header id="header" class="header">
+      <div class="top_page"></div>
+    </header>
+    <div class="container">
+      <div class="first-title">
+        <div class="top_title">مشخصات و مدارک</div>
+      </div>
+      <div class="my-5">
+        <div class="complete_header">
+          <div class="d-flex align-items-center">
+            <img class="card_company_logo" src="\resource\img\company\4.png" alt="سینا" />
+            <!-- <h1 class="compare_title">بیمه سینا</h1> -->
+            <div class="compare_desc">بیمه شخص ثالث</div>
+          </div>
+          <div class="tracking_code">کد پیگیری - {{ trackingCode }}</div>
+        </div>
+        <div class="row compare_content complete_content">
+          <div class="grey_sec">
+            <div class="sec_title">مشخصات بیمه‌گذار</div>
+            <div class="sec_top">
+              <div class="data_row w-200 in_111">
+                <label for="name_" class="form-item-required" title="نام">نام</label>
+                <b-form-input v-model="first_name"></b-form-input>
+              </div>
+              <div class="data_row w-200 in_111">
+                <label for="family_" class="form-item-required" title="نام خانوادگی">نام خانوادگی</label>
+                <b-form-input v-model="last_name"></b-form-input>
+              </div>
+              <div class="data_row w-150 in_111">
+                <label for="family_" class="form-item-required" title="تاریخ تولد">تاریخ تولد</label>
+                <date-picker
+                  v-model="birthDay1"
+                  placeholder="تاریخ تولد"
+                  mode="single"
+                  :styles="datepickercolors"
+                  :column="1"
+                  @submit="birthdaySelect()"
+                />
+              </div>
+              <div class="data_row in_111">
+                <label for="family_" class="form-item-required" title="کد ملی">کد ملی</label>
+                <b-form-input v-model="code_melli"></b-form-input>
+              </div>
+              <div class="data_row in_111">
+                <label for="family_" class="form-item-required" title="شماره همراه">شماره همراه</label>
+                <b-form-input v-model="mobile_number"></b-form-input>
+              </div>
+            </div>
+          </div>
+          <div class="grey_sec">
+            <div class="sec_title">مشخصات بیمه نامه</div>
+            <div class="sec_top">
+              <div class="data_row in_114">
+                <b-form-textarea id="textarea-default" placeholder="آدرس جهت درج بروی بیمه نامه" rows="6"></b-form-textarea>
+              </div>
+              <div class="sec_bottom">
+                <div class="data_row in_113">
+                  <div class="jss1408 jss1409">
+                    <label
+                      v-if="carCardFront"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                      :style="{
+                        backgroundImage:
+                          'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + 'data:image/jpeg;base64,' + carCardFront + ')',
+                      }"
+                    >
+                      <!-- <img v-if="carCardFront" class="image_cards" :src="'data:image/jpeg;base64,' + carCardFront" /> -->
+                      <span class="MuiButton-label"
+                        ><div style="color: white" class="jss1417">
+                          <div>بارگزاری مجدد</div>
+                          <div>تصویر روی کارت ماشین یا برگ سبز</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="carCardFront" accept="image/jpeg" class="d-none" plain @change="imageCarCardFront"> </b-form-file
+                      ></span>
+                    </label>
+                    <label
+                      v-if="carCardFront == null"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                    >
+                      <span class="MuiButton-label"
+                        ><div class="jss1417">
+                          <div>تصویر روی کارت ماشین یا برگ سبز</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="carCardFront" accept="image/jpeg" class="d-none" plain @change="imageCarCardFront"> </b-form-file
+                      ></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="data_row in_113">
+                  <div class="jss1408 jss1409">
+                    <label
+                      v-if="carCardBack"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                      :style="{
+                        backgroundImage:
+                          'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + 'data:image/jpeg;base64,' + carCardBack + ')',
+                      }"
+                    >
+                      <!-- <img v-if="carCardFront" class="image_cards" :src="'data:image/jpeg;base64,' + carCardFront" /> -->
+                      <span class="MuiButton-label"
+                        ><div style="color: white" class="jss1417">
+                          <div>بارگزاری مجدد</div>
+                          <div>تصویر پشت کارت ماشین یا برگ سبز</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="carCardBack" accept="image/jpeg" class="d-none" plain @change="imageCarCardBack"> </b-form-file
+                      ></span>
+                    </label>
+                    <label
+                      v-if="carCardBack == null"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                    >
+                      <span class="MuiButton-label"
+                        ><div class="jss1417">
+                          <div>تصویر پشت کارت ماشین یا برگ سبز</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="carCardBack" accept="image/jpeg" class="d-none" plain @change="imageCarCardBack"> </b-form-file
+                      ></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="data_row in_113">
+                  <div class="jss1408 jss1409">
+                    <label
+                      v-if="carLastIns"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                      :style="{
+                        backgroundImage:
+                          'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + 'data:image/jpeg;base64,' + carLastIns + ')',
+                      }"
+                    >
+                      <!-- <img v-if="carCardFront" class="image_cards" :src="'data:image/jpeg;base64,' + carCardFront" /> -->
+                      <span class="MuiButton-label"
+                        ><div style="color: white" class="jss1417">
+                          <div>بارگزاری مجدد</div>
+                          <div>تصویر روی بیمه نامه قبلی</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="carLastIns" accept="image/jpeg" class="d-none" plain @change="imageLastIns"> </b-form-file
+                      ></span>
+                    </label>
+                    <label
+                      v-if="carLastIns == null"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                    >
+                      <span class="MuiButton-label"
+                        ><div class="jss1417">
+                          <div>تصویر روی بیمه نامه قبلی</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="carLastIns" accept="image/jpeg" class="d-none" plain @change="imageLastIns"> </b-form-file
+                      ></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="data_row in_113">
+                  <div class="jss1408 jss1409">
+                    <label
+                      v-if="govahinameImage"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                      :style="{
+                        backgroundImage:
+                          'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + 'data:image/jpeg;base64,' + govahinameImage + ')',
+                      }"
+                    >
+                      <!-- <img v-if="carCardFront" class="image_cards" :src="'data:image/jpeg;base64,' + carCardFront" /> -->
+                      <span class="MuiButton-label"
+                        ><div style="color: white" class="jss1417">
+                          <div>بارگزاری مجدد</div>
+                          <div>تصویر روی گواهینامه رانندگی</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="govahinameImage" accept="image/jpeg" class="d-none" plain @change="imageGovahiname"> </b-form-file
+                      ></span>
+                    </label>
+                    <label
+                      v-if="govahinameImage == null"
+                      class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss1410 jss1412 jss1413 MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+                      tabindex="0"
+                      role="button"
+                      aria-disabled="false"
+                      style="background-color: rgb(255, 255, 255); background-size: cover; background-position: center center"
+                    >
+                      <span class="MuiButton-label"
+                        ><div class="jss1417">
+                          <div>تصویر روی گواهینامه رانندگی</div>
+                          <span class="icon-UPLOAD1" style="font-family: bbFontIcon; font-size: 48px"
+                            ><svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              class="bi bi-arrow-up-square-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                              /></svg
+                          ></span>
+                        </div>
+
+                        <b-form-file v-model="govahinameImage" accept="image/jpeg" class="d-none" plain @change="imageGovahiname"> </b-form-file
+                      ></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grey_sec">
+            <div class="sec_title">مشخصات ارسال</div>
+            <div class="d-flex">
+              <div class="sec_right">
+                <div class="data_row in_112">
+                  <div class="provinces p-2">
+                    <label class="form-item-required" title="استان">استان</label>
+                    <v-select
+                      @input="setActiveState"
+                      label="province_name_fa"
+                      :options="$store.state.provinces"
+                      :value="provincesSelected"
+                      dir="rtl"
+                    ></v-select>
+                  </div>
+                  <div class="provinces p-2">
+                    <label class="form-item-required" title="شهر">شهر</label>
+                    <v-select
+                      @input="setActiveCity"
+                      label="name_fa"
+                      :options="selectedProvinceName.cities"
+                      :value="selectedProvinceCityName"
+                      dir="rtl"
+                    ></v-select>
+                  </div>
+                </div>
+              </div>
+              <div class="sec_left p-2">
+                <label class="form-item-required" title="آدرس">آدرس</label>
+                <b-row>
+                  <b-col style="padding: 0px 12px">
+                    <b-form-textarea v-model="send_address" id="textarea-small" size="md" rows="4"></b-form-textarea>
+                  </b-col>
+                </b-row>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="accept_btn step-button" @click.stop="editOrder()">تایید و ادامه</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import { mapActions } from 'vuex'
+// import moment from 'moment'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
+export default {
+  layout: 'main',
+  components: { vSelect },
+  data() {
+    return {
+      loading: false,
+      orderId: null,
+      trackingCode: null,
+      first_name: null,
+      last_name: null,
+      code_melli: null,
+      mobile_number: null,
+      ins_address: null,
+      provincesSelected: null,
+      selectedProvinceName: {},
+      selectedProvinceCityName: null,
+      send_address: null,
+      birthDay1: '',
+      birth_day: null,
+
+      birthDay: null,
+      birthMonth: null,
+      birthYear: null,
+      user_name: null,
+      selected: null,
+
+      code_posti: null,
+
+      city_sel: 1,
+
+      datepickercolors: {
+        'primary-color': '#08bbbf',
+        'secondary-color': '#08bbbf',
+        'in-range-background': '#08bbbf',
+        'icon-background': '#f4f5f5',
+      },
+      carCardFront: null,
+      carCardBack: null,
+      carLastIns: null,
+      govahinameImage: null,
+      order: {},
+      server_url: process.env.API_BASE_URL + '/order/downloadImage/',
+    }
+  },
+  // watch: {
+  //   refresh() {
+  //     this.imageCarCardFront()
+  //   },
+  // },
+  mounted() {
+    this.orderId = this.$route.query.order_id
+    console.log(this.orderId) // eslint-disable-line
+
+    this.getData(this.orderId)
+    this.getInfo()
+    // this.imageCarCardFront()
+  },
+  methods: {
+    editOrder() {
+      const data = {
+        _id: this.orderId,
+        status: '11',
+        firstName: this.first_name,
+        lastName: this.last_name,
+        nationalCode: this.code_melli,
+        birthday: this.birth_day,
+        mobileNumber: this.mobile_number,
+        insAddress: this.ins_address,
+        state: this.provincesSelected,
+        city: this.selectedProvinceCityName,
+        sendAddress: this.send_address,
+      }
+      this.sendRequest(data)
+      this.$router.push({
+        path: `/invoice/thirdparty/?order_id=${this.$route.query.order_id}`,
+      })
+    },
+    sendRequest(data) {
+      this.loading = true
+      this.$store.dispatch('orders/carBodyEditOrder', data).then((result) => {
+        console.log(result) // eslint-disable-next-line
+        this.loading = false
+      })
+    },
+    getInfo() {
+      this.$store
+        .dispatch('auth/getInfo')
+        .then((result) => {
+          this.first_name = result.firstName
+          this.last_name = result.lastName
+          this.code_melli = result.nationalCode
+          this.mobile_number = result.mobilePhone
+        })
+        .catch(() => {})
+    },
+    getData(id) {
+      this.$store.dispatch('orders/getOrderbyID', id).then((result) => {
+        console.log('order get by id done.') // eslint-disable-line
+        this.trackingCode = result.tracking_code
+        this.birthDay1 = result.birthday
+        console.log(this.birthDay1)
+
+        if (result.carCardImageFrontUrl) {
+          this.carCardFront = result.carCardImageFrontUrl
+          this.getImage(this.carCardFront, 'carCardImageFrontUrl')
+        }
+        if (result.carCardImageBackUrl) {
+          this.carCardBack = result.carCardImageBackUrl
+          this.getImage(this.carCardBack, 'carCardImageBackUrl')
+        }
+        if (result.carLastInsImageUrl) {
+          this.carLastIns = result.carLastInsImageUrl
+          this.getImage(this.carLastIns, 'carLastInsImageUrl')
+        }
+        if (result.govahinameImageUrl) {
+          this.govahinameImage = result.govahinameImageUrl
+          this.getImage(this.govahinameImage, 'govahinameImageUrl')
+        }
+      })
+      console.log(this.trackingCode) // eslint-disable-line
+    },
+    ...mapActions({
+      uploadImageOrder: 'orders/uploadImageOrder',
+    }),
+    imageCarCardFront() {
+      // await 0.5 second for get v-model data's
+      setTimeout(() => {
+        this.OnUpdateImage(this.carCardFront, this.orderId, 'carCardImageFrontUrl')
+      }, 500)
+    },
+    imageCarCardBack() {
+      // await 0.5 second for get v-model data's
+      setTimeout(() => {
+        this.OnUpdateImage(this.carCardBack, this.orderId, 'carCardImageBackUrl')
+      }, 500)
+    },
+    imageLastIns() {
+      // await 0.5 second for get v-model data's
+      setTimeout(() => {
+        this.OnUpdateImage(this.carLastIns, this.orderId, 'carLastInsImageUrl')
+      }, 500)
+    },
+    imageGovahiname() {
+      // await 0.5 second for get v-model data's
+      setTimeout(() => {
+        this.OnUpdateImage(this.govahinameImage, this.orderId, 'govahinameImageUrl')
+      }, 500)
+    },
+    OnUpdateImage(file, id, key) {
+      this.uploadImageOrder({
+        imageFile: file,
+        orderId: id,
+        name: key,
+      })
+        .then((result) => {
+          if (key === 'carCardImageFrontUrl') {
+            this.carCardFront = result.carCardImageFrontUrl
+            console.log('عکس با موفقیت بارگزاری شد') // eslint-disable-line
+            this.getImage(this.carCardFront, 'carCardImageFrontUrl')
+          } else if (key === 'carCardImageBackUrl') {
+            this.carCardBack = result.carCardImageBackUrl
+            console.log('عکس با موفقیت بارگزاری شد') // eslint-disable-line
+            this.getImage(this.carCardBack, 'carCardImageBackUrl')
+          } else if (key === 'carLastInsImageUrl') {
+            this.carLastIns = result.carLastInsImageUrl
+            console.log('عکس با موفقیت بارگزاری شد') // eslint-disable-line
+            this.getImage(this.carLastIns, 'carLastInsImageUrl')
+          } else if (key === 'govahinameImageUrl') {
+            this.govahinameImage = result.govahinameImageUrl
+            console.log('عکس با موفقیت بارگزاری شد') // eslint-disable-line
+            this.getImage(this.govahinameImage, 'govahinameImageUrl')
+          }
+        })
+        .catch((err) => {
+          console.log('خطا در بارگزاری عکس!') // eslint-disable-line
+          console.log(err)
+        })
+    },
+    getImage(name, key) {
+      setTimeout(() => {
+        this.$store
+          .dispatch('orders/downloadImageOrder', name)
+          .then((result) => {
+            if (key === 'carCardImageFrontUrl') {
+              this.carCardFront = result
+              console.log('عکس روی کارت ماشین یا برگ سبز دریافت شد!') // eslint-disable-line
+            } else if (key === 'carCardImageBackUrl') {
+              this.carCardBack = result
+              console.log('عکس پشت کارت ماشین یا برگ سبز دریافت شد!') // eslint-disable-line
+            } else if (key === 'carLastInsImageUrl') {
+              this.carLastIns = result
+              console.log('عکس بیمه نامه قبلی دریافت شد!') // eslint-disable-line
+            } else if (key === 'govahinameImageUrl') {
+              this.govahinameImage = result
+              console.log('عکس روی گواهینامه دریافت شد!') // eslint-disable-line
+            }
+          })
+          .catch((err) => {
+            console.log('عکسی یافت نشد!') // eslint-disable-line
+            console.log(err) // eslint-disable-line
+          })
+      }, 500)
+    },
+    setActiveState(value) {
+      this.selectedProvinceName = value
+      this.provincesSelected = value.province_name_fa
+      console.log(value) // eslint-disable-line
+    },
+    setActiveCity(value) {
+      this.selectedProvinceCityName = value.name_fa
+      console.log(value) // eslint-disable-line
+    },
+    showModal() {
+      this.visible = true
+    },
+    birthdaySelect() {
+      // this.birth_day = moment(this.birthDay1).format('YYYY/MM/DD')
+      this.birth_day = this.birthDay1.toString()
+      console.log('birthday:' + this.birth_day)
+    },
+  },
+}
+</script>
+<style scoped>
+.accept_btn {
+  background-color: #08bcc0;
+  display: inline-block;
+}
+.sec_bottom {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sec_left {
+  width: 100%;
+}
+.jss1413 {
+  width: 323px !important;
+  border: 1px solid #ced4da;
+}
+.jss1405 > div {
+  margin-bottom: 16px !important;
+}
+.jss1409 {
+  margin: 0px !important;
+}
+.jss1412 {
+  width: 164px;
+  height: 164px;
+}
+.MuiButton-label {
+  width: 100%;
+  align-items: inherit;
+  padding: 40px;
+  justify-content: inherit;
+}
+.jss1417 {
+  display: flex;
+  opacity: 0.85;
+  text-align: center;
+  align-items: center;
+  white-space: nowrap;
+  flex-direction: column;
+  justify-content: center;
+}
+.jss1411 span {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jss1412 {
+  display: flex;
+  border-radius: 1px;
+  flex-direction: column;
+}
+
+.sel_112 {
+  margin-left: 10px;
+  height: 70px;
+}
+.complete_content {
+  padding: 10px 40px;
+}
+.in_111 {
+  width: 230px;
+  margin: 0 8px;
+}
+.in_112 {
+  width: 480px;
+  margin: 0 8px;
+}
+.in_113 {
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+.in_114 {
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+.grey_sec {
+  color: #53575b !important;
+  background-color: #fafafa;
+  width: 100%;
+  text-align: right;
+  margin-bottom: 30px;
+}
+.ins-step-box .complete_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.tracking_code {
+  padding: 20px;
+  font-weight: 400;
+}
+.card_company_logo {
+  width: 133px;
+  max-width: 100%;
+  padding: 0 30px;
+  border-left: 1px solid #b3b8bc;
+}
+.first-title {
+  text-align: center;
+  color: white;
+}
+.top_title {
+  padding: 25px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.compare_title {
+  margin: 0;
+}
+.compare_desc {
+  padding: 0px 40px;
+  font-weight: 400;
+  font-size: 20px;
+}
+.sec_title {
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+}
+.sec_top {
+  margin: 8px 0 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.input_12 {
+  height: 70px;
+}
+</style>
