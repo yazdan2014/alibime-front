@@ -45,7 +45,7 @@
                           <a href="/thirdparty" class="dropdown-item border-radius-md">
                             <span>بیمه شخص ثالث</span>
                           </a>
-                          <a href="./pages/author.html" data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item border-radius-md">
+                          <a href="/car-body" data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item border-radius-md">
                             <span>بیمه بدنه خودرو</span>
                           </a>
                           <a href="./pages/author.html" data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item border-radius-md">
@@ -288,35 +288,29 @@
               <h6 class="text-lg">علی‌بیمه</h6>
               <ul class="flex-column pe-0 nav">
                 <li class="nav-item">
-                  <a class="nav-link text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" target="_blank">
+                  <a class="nav-link text-secondary" href="/about-us" target="_blank">
                     درباره ما
                   </a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" target="_blank">
+                  <a class="nav-link text-secondary" href="/contact-us" target="_blank">
                     تماس با ما
                   </a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" target="_blank">
+                  <a class="nav-link text-secondary" href="/why-alibime" target="_blank">
                     چرا علی‌بیمه
                   </a>
                 </li>
-
                 <li class="nav-item">
-                  <a class="nav-link text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" target="_blank">
-                    مقالات و وبلاگ
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" target="_blank">
+                  <a class="nav-link text-secondary" href="/careers" target="_blank">
                     فرصت‌های شغلی
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" target="_blank">
+                  <a class="nav-link text-secondary" href="/privacy-policy" target="_blank">
                     شرایط و قوانین
                   </a>
                 </li>

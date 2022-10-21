@@ -315,10 +315,11 @@
                           <div class="card_item_body">
                             <div class="card_item company__price">
                               <vue-numeric
-                                v-model="final_Price"
+                                v-model="finalPrice"
                                 separator=","
                                 read-only
                               ></vue-numeric>
+                              
                               تومان
                             </div>
                             <div
@@ -1024,7 +1025,7 @@ export default {
       this.$store
         .dispatch('offers/getCarBodyOffer', data)
         .then((result) => {
-          // console.log(result) // eslint-disable-line
+          console.log(result) // eslint-disable-line
           this.final_Price = result.finalPrice
           this.maaliat = result.maaliat
           this.whithoutMaaliat = result.finalPriceWithoutMaaliat

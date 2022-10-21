@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position:relative">
     <header class="header-2">
       <div class="page-header relative" style="background-image: url('/resource/img/bg2.jpg')">
         <span class="mask bg-gradient-primary opacity-85"></span>
@@ -18,7 +18,7 @@
                 </a>
               </div>
               <div class="cal-md-3 col-sm-4">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="card card-body move-on-hover mx-md-2 px-2 text-center">
+                <a href="/car-body" data-bs-toggle="modal" data-bs-target="#exampleModal" class="card card-body move-on-hover mx-md-2 px-2 text-center">
                   <img class="mt-3" src="/resource/img/logos/badane.svg" alt="" style="height: 60px" />
                   <h5 class="text-md mt-3">بیمه بدنه</h5>
                 </a>

@@ -1,8 +1,9 @@
 <template>
   <div>
     <!-- Header -->
-    <header id="header" class="header">
-      <div class="header-content">
+    <br><br><br><br>
+    <header id="header" class="header relative">
+      <div class="header-content relative">
         <div class="container">
           <div class="row">
             <div class="col-lg-12 col-xl-12">
@@ -15,7 +16,7 @@
       </div>
     </header>
 
-    <div class="cards-1">
+    <div class="cards-1 relative">
       <div class="container">
         <div class="row">
           <!-- end of col -->
@@ -59,7 +60,12 @@
 </template>
 <script>
 export default {
-  layout: 'landing-pages',
+  head() {
+    return {
+      title: `تماس با ما`,
+    }
+  },
+  layout: 'main',
 }
 </script>
 
