@@ -18,6 +18,10 @@
 
     <div class="cards-1 relative">
       <div class="container">
+        <p class="contact-us__description">
+          مشتری گرامی برای پیگیری یا سؤال درباره سفارش خود، از آدرس ایمیل زیر استفاده کنید. برای تسریع در پاسخ گویی شماره سفارش (پیگیری) را در
+          ایمیل خود ذکر کنید.
+        </p>
         <div class="row">
           <!-- end of col -->
         </div>
@@ -25,21 +29,17 @@
           <div class="content-card">
             <div class="contact-us__content d-flex text-right">
               <div class="contact-us__info">
-                <p class="contact-us__description">
-                  مشتری گرامی برای پیگیری یا سؤال درباره سفارش خود، از آدرس ایمیل زیر استفاده کنید. برای تسریع در پاسخ گویی شماره سفارش (پیگیری) را در
-                  ایمیل خود ذکر کنید.
-                </p>
-                <p class="subtitle">آدرس:</p>
+                <a3 class="subtitle">آدرس:</a3>
                 <p class="contact-us__address">تهران، فلکه دوم صادقیه، ساختمان گلدیس، طبقه ۱۱ واحد 1102</p>
-                <p class="subtitle">کد پستی:</p>
+                <a3 class="subtitle">کد پستی:</a3>
                 <p class="contact-us__postal-code">1513737514</p>
-                <p class="subtitle">تلفن تماس:</p>
+                <a3 class="subtitle">تلفن تماس:</a3>
                 <p><a href="tel:+982191319030">021-91319030</a></p>
-                <p class="subtitle">پست الکترونیکی:</p>
+                <a3 class="subtitle">پست الکترونیکی:</a3>
                 <p class="contact-us__email">
                   <a class="" href="mailto:info@alibime.ir">info@alibime.ir</a>
                 </p>
-                <p class="subtitle">شبکه های اجتماعی:</p>
+                <a3 class="subtitle">شبکه های اجتماعی:</a3>
               </div>
               <div class="contact-us__map">
                 <iframe
