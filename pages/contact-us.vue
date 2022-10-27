@@ -29,17 +29,17 @@
           <div class="content-card">
             <div class="contact-us__content d-flex text-right">
               <div class="contact-us__info">
-                <a3 class="subtitle">آدرس:</a3>
+                <h3 class="subtitle">آدرس:</h3>
                 <p class="contact-us__address">تهران، فلکه دوم صادقیه، ساختمان گلدیس، طبقه ۱۱ واحد 1102</p>
-                <a3 class="subtitle">کد پستی:</a3>
+                <h3 class="subtitle">کد پستی:</h3>
                 <p class="contact-us__postal-code">1513737514</p>
-                <a3 class="subtitle">تلفن تماس:</a3>
+                <h3 class="subtitle">تلفن تماس:</h3>
                 <p><a href="tel:+982191319030">021-91319030</a></p>
-                <a3 class="subtitle">پست الکترونیکی:</a3>
+                <h3 class="subtitle">پست الکترونیکی:</h3>
                 <p class="contact-us__email">
                   <a class="" href="mailto:info@alibime.ir">info@alibime.ir</a>
                 </p>
-                <a3 class="subtitle">شبکه های اجتماعی:</a3>
+                <h3  class="subtitle">شبکه های اجتماعی:</h3  >
               </div>
               <div class="contact-us__map">
                 <iframe
