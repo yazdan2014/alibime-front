@@ -25,7 +25,7 @@
                     <span class="tabLabel">{{ car_production_year }}</span>
                   </div>
                 </div>
-                <div class="col-3 text-left">
+                <div class="col-3 teqt-left">
                   <i class="fa fa-pencil-square-o me-1"></i>
                   <span type="button" data-toggle="modal" data-target="#myModal" class="tabLabel" @click.stop="onRunEditModal">ویرایش اطلاعات</span>
                 </div>
@@ -173,8 +173,8 @@
                   </div>
                   <div class="mt-2 sidebar_footer">
                     <span>تعهد مالی: {{ basePropertyDamage }} میلیون‌تومان</span>
-                    <span>تعهدجانی: ۶۴۰میلیون‌تومان</span>
-                    <span>تعهدراننده: ۴۸۰میلیون‌تومان</span>
+                    <span>تعهدجانی: ۸۰۰میلیون‌تومان</span>
+                    <span>تعهدراننده: ۶۰۰میلیون‌تومان</span>
                   </div>
                 </div>
               </div>
@@ -641,7 +641,7 @@ export default {
       financialDamage: 0,
       lifeDamage: 0,
       havadesDamage: 0,
-      basePropertyDamage: 16,
+      basePropertyDamage: 20,
       finalBaseProperty: null,
       havadesFinal: 0,
 
@@ -666,10 +666,6 @@ export default {
       slider: '16',
       sliderValues: null,
       sliderValues1: [
-        {
-          label: '16٫000٫000 تومان',
-          value: '16',
-        },
         {
           label: '20٫000٫000 تومان',
           value: '20',
@@ -769,7 +765,6 @@ export default {
         { text: '۳۲ میلیون تومان', value: '32' },
         { text: '۳۰ میلیون تومان', value: '30' },
         { text: '۲۰ میلیون تومان', value: '20' },
-        { text: '۱۶ میلیون تومان', value: '16' },
       ],
     }
   },

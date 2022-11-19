@@ -34,6 +34,12 @@
                   </option>
                 </select>
               </div>
+              <div class="col-md-4 ps-md-2">
+                <div class="title_">سال ساخت</div>
+                <select  class="select__" @change="selectCar()">
+                  
+                </select>
+              </div>
             </div>
           </div>
           <div class="section_ mb-4">
@@ -117,7 +123,7 @@ export default {
       brand_: {},
       model_: {},
       test: 0,
-
+        
       test_: [
         { text: '۳۲۰ میلیون تومان', value: '320' },
         { text: '۲۶۰ میلیون تومان', value: '260' },
@@ -125,6 +131,7 @@ export default {
         { text: '۱۵۰ میلیون تومان', value: '150' },
         { text: '۱۰۰ میلیون تومان', value: '100' },
       ],
+      
     }
   },
   props: {
