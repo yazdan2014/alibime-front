@@ -27,9 +27,10 @@
                 </div>
                 <div class="col-3 teqt-left">
                   <i class="fa fa-pencil-square-o me-1"></i>
-                  <span type="button" data-toggle="modal" data-target="#myModal" class="tabLabel" @click.stop="onRunEditModal">ویرایش اطلاعات</span>
+                  <span type="button" data-toggle="modal" href="https://alibime.info/thirdparty" class="tabLabel" >ویرایش اطلاعات</span>
+                  <!-- <span type="button" data-toggle="modal" data-target="#myModal" class="tabLabel" @click.stop="onRunEditModal">ویرایش اطلاعات</span> -->
                 </div>
-                <!-- <div class="d-flex">
+                <!-- <div class="d-flex"> 
                   <div class="step-link">
                     <div class="modal_button" @click="type_modal">
                       <span class="tabStatus">کاربری: </span>
