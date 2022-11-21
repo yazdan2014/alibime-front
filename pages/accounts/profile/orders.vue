@@ -55,7 +55,14 @@
                 </ul>
               </div>
               <div class="col-12 col-md-9 info-content">
-                <vue-good-table :columns="columns" :rows="tableRows" :rtl="true" :row-style-class="rowStyleClassFn" @on-row-click="onRowClick" />
+                <vue-good-table :columns="columns" :rows="tableRows" :rtl="true" :row-style-class="rowStyleClassFn" @on-row-click="onRowClick">
+                  <template slot="table-row" slot-scope="props">
+                    <span v-if="props.column.field == 'orderOperation'"
+                      ><button v-on:click="deleteOrder(props)">{{ props }}</button>
+                    </span>
+                    <span v-else> {{ props.formattedRow[props.column.field] }} </span>
+                  </template>
+                </vue-good-table>
               </div>
             </div>
           </div>
@@ -162,6 +169,7 @@ export default {
           const resultArray = result
           for (let index = 0; index < result.length; index++) {
             const element = resultArray[index]
+            console.log(element)
             const row = {
               trackCode: element.tracking_code,
               orderName: element.insType,
@@ -172,7 +180,6 @@ export default {
             // this.tableRows[row] = JSON.parse(JSON.stringify(row))
             this.tableRows.push(row)
           }
-          console.log(this.tableRows)
         })
         .catch((error) => {
           console.log(error) // eslint-disable-line
