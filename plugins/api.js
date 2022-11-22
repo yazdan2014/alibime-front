@@ -12,7 +12,7 @@ const urlAddOrder = 'order'
 const urlAddCarBodyOrder = 'order/car-body'
 const urlEditCarBodyOrder = 'order/car-body'
 const urlEditOrder = 'order'
-const urlDeleteOrder = 'order/{orderId}'
+const urlDeleteOrder = 'order'
 const urlEditStatusOrder = 'order/status'
 const urlUploadImageOrder = 'order/image/{orderId}/{name}'
 const urlDownloadImageOrder = '/order/downloadImage/{imageName}'
@@ -24,6 +24,7 @@ const createPay = 'payment/gopayment'
 const _getPayById = 'payment/getbyid'
 const verifyTransaction = 'payment/verify'
 const urlGetPayments = 'payment'
+const axios = require('axios')
 
 export default ({ app }, inject) => {
   inject('api', {
@@ -308,24 +309,47 @@ export default ({ app }, inject) => {
       })
     },
     deleteOrder(orderId) {
-      const url = String(urlDeleteOrder).replace('{orderId}', orderId)
+      const url = String(urlDeleteOrder)
+      const body = JSON.stringify({
+        _id: orderId,
+      })
+      const config = {
+        method: 'delete',
+        url: process.env.API_BASE_URL + '/' + url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+          'X-Access-Token': app.store.state.auth.token,
+        },
+        data: body,
+      }
       return new Promise((resolve, reject) => {
-        app.$axios
-          .create({
-            headers: {
-              'Content-Type': 'application/json',
-              'Cache-Control': 'no-cache',
-              'X-Access-Token': app.store.state.auth.token,
-            },
-          })
-          .$delete(url)
-          .then((result) => {
+        axios(config)
+          .then(function (result) {
             resolve(result)
           })
-          .catch((error) => {
+          .catch(function (error) {
             reject(app.$mhandler.check(error))
           })
       })
+      // const url = String(urlDeleteOrder)
+      // return new Promise((resolve, reject) => {
+      //   app.$axios
+      //     .create({
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Cache-Control': 'no-cache',
+      //         'X-Access-Token': app.store.state.auth.token,
+      //       },
+      //     })
+      //     .$delete(url)
+      //     .then((result) => {
+      //       resolve(result)
+      //     })
+      //     .catch((error) => {
+      //       reject(app.$mhandler.check(error))
+      //     })
+      // })
     },
     editStatusOrder(data) {
       return new Promise((resolve, reject) => {

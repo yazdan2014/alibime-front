@@ -97,7 +97,7 @@ export default {
     fullname() {
       const firstname = this.info && this.info.firstName ? this.info.firstName : ''
       const lastname = this.info && this.info.lastName ? this.info.lastName : ''
-      return String(firstname + lastname)
+      return String(firstname + ' ' + lastname)
     },
   },
   methods: {

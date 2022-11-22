@@ -58,7 +58,7 @@
                 <vue-good-table :columns="columns" :rows="tableRows" :rtl="true" :row-style-class="rowStyleClassFn" @on-row-click="onRowClick">
                   <template slot="table-row" slot-scope="props">
                     <span v-if="props.column.field == 'orderOperation'"
-                      ><button v-on:click="deleteOrder(props)">{{ props }}</button>
+                      ><button v-on:click="deleteOrder(props.row.orderOperation)">حذف</button>
                     </span>
                     <span v-else> {{ props.formattedRow[props.column.field] }} </span>
                   </template>
@@ -155,18 +155,27 @@ export default {
     fullname() {
       const firstname = this.info && this.info.firstName ? this.info.firstName : ''
       const lastname = this.info && this.info.lastName ? this.info.lastName : ''
-      return String(firstname + lastname)
+      return String(firstname + ' ' + lastname)
     },
   },
   mounted() {
     this.getOrders()
   },
   methods: {
+    deleteOrder(_id) {
+      this.$store.dispatch('orders/deleteOrder', _id).then((result) => {
+        if (result.status === 200) {
+          console.log('success')
+          this.getOrders()
+        }
+      })
+    },
     getOrders() {
       this.$store
         .dispatch('orders/getOrders')
         .then((result) => {
           const resultArray = result
+          const newTable = []
           for (let index = 0; index < result.length; index++) {
             const element = resultArray[index]
             console.log(element)
@@ -176,10 +185,12 @@ export default {
               companyName: element.company,
               createdDate: moment(element.createdDate).tz('Asia/Tehran').format('jYYYY/jM/jD'),
               orderState: this.orderStatus(element.status),
+              orderOperation: element._id,
             }
             // this.tableRows[row] = JSON.parse(JSON.stringify(row))
-            this.tableRows.push(row)
+            newTable.push(row)
           }
+          this.tableRows = newTable
         })
         .catch((error) => {
           console.log(error) // eslint-disable-line
