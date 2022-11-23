@@ -58,7 +58,8 @@
                 <vue-good-table :columns="columns" :rows="tableRows" :rtl="true" :row-style-class="rowStyleClassFn" @on-row-click="onRowClick">
                   <template slot="table-row" slot-scope="props">
                     <span v-if="props.column.field == 'orderOperation'"
-                      ><button v-on:click="deleteOrder(props.row.orderOperation)">حذف</button>
+                      ><button v-on:click="deleteOrder(props.row.orderOperation._id)">حذف</button>
+                      <button type="button" @click.stop="onRunEditModal(props.row.orderOperation._id)">نمایش جزئیات</button>
                     </span>
                     <span v-else> {{ props.formattedRow[props.column.field] }} </span>
                   </template>
@@ -79,6 +80,7 @@
       <b-button class="mt-3" variant="outline-warning" block @click="hideModal">پشیمون شدم!</b-button>
       <b-button class="mt-2" variant="outline-danger" block @click="onLogout">بله خارج میشوم</b-button></b-modal
     >
+    <show-order-modal ref="showordermodal"></show-order-modal>
   </div>
 </template>
 <script>
@@ -91,7 +93,7 @@ export default {
   layout: 'main',
 
   middleware: ['check-auth', 'auth'],
-  components: { VueGoodTable },
+  components: { VueGoodTable, showOrderModal: () => import('@/components/car-items/thirdparty/ShowOrderModal') },
   data() {
     return {
       columns: [
@@ -162,6 +164,10 @@ export default {
     this.getOrders()
   },
   methods: {
+    onRunEditModal(_id) {
+      this.$refs.showordermodal.showModal()
+      this.$refs.showordermodal.getOrder(_id)
+    },
     deleteOrder(_id) {
       this.$store.dispatch('orders/deleteOrder', _id).then((result) => {
         if (result.status === 200) {
@@ -185,7 +191,7 @@ export default {
               companyName: element.company,
               createdDate: moment(element.createdDate).tz('Asia/Tehran').format('jYYYY/jM/jD'),
               orderState: this.orderStatus(element.status),
-              orderOperation: element._id,
+              orderOperation: element,
             }
             // this.tableRows[row] = JSON.parse(JSON.stringify(row))
             newTable.push(row)
@@ -195,6 +201,11 @@ export default {
         .catch((error) => {
           console.log(error) // eslint-disable-line
         })
+    },
+    getOrder(_id) {
+      this.$store.dispatch('orders/getOrderbyID', _id).then((result) => {
+        console.log(result)
+      })
     },
     orderStatus(status) {
       if (status === 11) {
