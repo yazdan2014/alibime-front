@@ -53,7 +53,7 @@
             <div class="sec_title">مشخصات بیمه نامه</div>
             <div class="sec_top">
               <div class="data_row in_114">
-                <b-form-textarea id="textarea-default" placeholder="آدرس جهت درج بروی بیمه نامه" rows="6"></b-form-textarea>
+                <b-form-textarea id="textarea-default" v-model="ins_address" placeholder="آدرس جهت درج بروی بیمه نامه" rows="6"></b-form-textarea>
               </div>
               <div class="sec_bottom">
                 <div class="data_row in_113">
@@ -370,6 +370,7 @@
           </div>
         </div>
         <div class="text-center">
+          <div v-if="empty_field == true" class="alert alert-primary">لطفا تمامی فیلد ها را کامل کنید</div>
           <div class="accept_btn step-button" @click.stop="editOrder()">تایید و ادامه</div>
         </div>
       </div>
@@ -423,6 +424,7 @@ export default {
       govahinameImage: null,
       order: {},
       server_url: process.env.API_BASE_URL + '/order/downloadImage/',
+      empty_field: null,
     }
   },
   // watch: {
@@ -440,6 +442,25 @@ export default {
   },
   methods: {
     editOrder() {
+      if (
+        !this.first_name ||
+        !this.last_name ||
+        !this.code_melli ||
+        !this.birth_day ||
+        !this.mobile_number ||
+        !this.ins_address ||
+        !this.provincesSelected ||
+        !this.selectedProvinceCityName ||
+        !this.send_address ||
+        !this.carCardFront ||
+        !this.carCardBack ||
+        !this.carLastIns ||
+        !this.govahinameImage
+      ) {
+        this.empty_field = true
+        console.log('Empty')
+        return
+      }
       const data = {
         _id: this.orderId,
         status: '11',

@@ -58,8 +58,10 @@
                 <vue-good-table :columns="columns" :rows="tableRows" :rtl="true" :row-style-class="rowStyleClassFn" @on-row-click="onRowClick">
                   <template slot="table-row" slot-scope="props">
                     <span v-if="props.column.field == 'orderOperation'"
-                      ><button v-on:click="deleteOrder(props.row.orderOperation._id)">حذف</button>
-                      <button type="button" @click.stop="onRunEditModal(props.row.orderOperation._id)">نمایش جزئیات</button>
+                      ><button v-on:click="deleteOrder(props.row.orderOperation._id)" class="btn btn-sm btn-danger">حذف</button>
+                      <button type="button" @click.stop="onRunEditModal(props.row.orderOperation._id)" class="btn btn-sm btn-primary">
+                        نمایش جزئیات
+                      </button>
                     </span>
                     <span v-else> {{ props.formattedRow[props.column.field] }} </span>
                   </template>
