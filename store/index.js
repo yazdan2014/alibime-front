@@ -86,7 +86,8 @@ export const state = () => ({
     { value: 2018, text: '۱۳۹۷ - 2018' },
     { value: 2019, text: '۱۳۹۸ - 2019' },
     { value: 2020, text: '۱۳۹۹ - 2020' },
-    { value: 2021, text: '1400 - 2021' },
+    { value: 2021, text: '۱۴۰۰ - 2021' },
+    { value: 2022, text: '۱۴۰۱ - 2022' },
   ],
   carBuildYearsSh: [
     { value: 1366, text: '۱۳۶۶ - 1987' },
@@ -123,7 +124,8 @@ export const state = () => ({
     { value: 1397, text: '۱۳۹۷ - 2018' },
     { value: 1398, text: '۱۳۹۸ - 2019' },
     { value: 1399, text: '۱۳۹۹ - 2020' },
-    { value: 1400, text: '1400 - 2021' },
+    { value: 2021, text: '۱۴۰۰ - 2021' },
+    { value: 2022, text: '۱۴۰۱ - 2022' },
   ],
   insuranceCompanies: [
     { value: 1, text: 'بیمه سینا' },

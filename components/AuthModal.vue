@@ -22,6 +22,7 @@
         </b-form-group>
         <b-form-group v-if="step === 2" label="کد تایید" label-for="confirmationCode">
           <b-form-input
+            maxlength="5"
             id="confirmationCode"
             v-model="$v.item.confirmationCode.$model"
             :state="validateState($v.item.confirmationCode)"
