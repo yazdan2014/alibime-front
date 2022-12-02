@@ -24,6 +24,8 @@ const createPay = 'payment/gopayment'
 const _getPayById = 'payment/getbyid'
 const verifyTransaction = 'payment/verify'
 const urlGetPayments = 'payment'
+const urlGetTickets = 'ticket'
+const urlNewTicket = 'ticket'
 const axios = require('axios')
 
 export default ({ app }, inject) => {
@@ -549,6 +551,53 @@ export default ({ app }, inject) => {
             resolve(result)
           })
           .catch((error) => {
+            reject(app.$mhandler.check(error))
+          })
+      })
+    },
+    getTickets() {
+      return new Promise((resolve, reject) => {
+        app.$axios
+          .create({
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache',
+              'x-access-token': app.store.state.auth.token,
+            },
+          })
+          .$get(urlGetTickets)
+          .then((result) => {
+            resolve(result)
+          })
+          .catch((error) => {
+            reject(app.$mhandler.check(error))
+          })
+      })
+    },
+    newTicket(data) {
+      const url = String(urlNewTicket)
+      const body = JSON.stringify({
+        orderId: data.orderId,
+        title: data.title,
+        text: data.text,
+        attachmentsURL: data.attachmentsURL,
+      })
+      const config = {
+        method: 'post',
+        url: process.env.API_BASE_URL + '/' + url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+          'X-Access-Token': app.store.state.auth.token,
+        },
+        data: body,
+      }
+      return new Promise((resolve, reject) => {
+        axios(config)
+          .then(function (result) {
+            resolve(result)
+          })
+          .catch(function (error) {
             reject(app.$mhandler.check(error))
           })
       })

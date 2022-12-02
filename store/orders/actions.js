@@ -98,6 +98,34 @@ export default {
         })
     })
   },
+  newTicket(vuexContext, data) {
+    return new Promise((resolve, reject) => {
+      this.$api
+        .newTicket(data)
+        .then((result) => {
+          vuexContext.commit('newTicket', data)
+          resolve(result)
+        })
+        .catch((status) => {
+          reject(status)
+        })
+    })
+  },
+  getTickets(vuexContext) {
+    return new Promise((resolve, reject) => {
+      this.$api
+        .getTickets()
+        .then((result) => {
+          const tickets = [...result]
+          vuexContext.commit('getTickets', tickets)
+          resolve(result)
+        })
+        .catch((status) => {
+          reject(status)
+        })
+    })
+  },
+
   editStatusOrder(vuexContext, data) {
     return new Promise((resolve, reject) => {
       this.$api
