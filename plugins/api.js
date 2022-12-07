@@ -582,6 +582,7 @@ export default ({ app }, inject) => {
         text: data.text,
         attachmentsURL: data.attachmentsURL,
       })
+      console.log(data)
       const config = {
         method: 'post',
         url: process.env.API_BASE_URL + '/' + url,

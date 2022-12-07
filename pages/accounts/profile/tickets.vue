@@ -143,26 +143,12 @@ export default {
         .then((result) => {
           console.log(result)
           for (const ticket of result) {
-            this.rows.push({ trackingCode: 23492834, title: ticket.title, orderId: ticket.orderId, status: ticket.status })
+            this.rows.push({ trackingCode: ticket.trackingCode, title: ticket.title, orderId: ticket.orderId, status: ticket.status })
           }
         })
         .catch((error) => {
           console.log(error) // eslint-disable-line
         })
-    },
-    newTicket() {
-      const data = {
-        orderId: '34234234',
-        title: 'sdfsdfsd',
-        text: 'sdfsdf',
-        attachmentsURL: 'sdfsdf',
-      }
-      this.$store.dispatch('orders/newTicket', data).then((result) => {
-        console.log(result)
-        if (result.status === 200) {
-          console.log('success')
-        }
-      })
     },
     rowStyleClassFn(row) {
       return 'row_style'
