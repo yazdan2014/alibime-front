@@ -26,6 +26,7 @@ const verifyTransaction = 'payment/verify'
 const urlGetPayments = 'payment'
 const urlGetTickets = 'ticket'
 const urlNewTicket = 'ticket'
+const utlGetTicketById = 'ticket'
 const axios = require('axios')
 
 export default ({ app }, inject) => {

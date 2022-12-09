@@ -58,7 +58,7 @@
                 <a href="/accounts/profile/ticket/create"><button class="btn btn-info" style="float: left">ثبت تیکت جدید</button></a>
                 <h3>لیست تیکت ها</h3>
                 <hr />
-                <vue-good-table :columns="columns" :rows="rows" :rtl="true" />
+                <vue-good-table @on-row-click="onRowClick" :columns="columns" :rows="rows" :rtl="true" />
               </div>
             </div>
           </div>
@@ -143,12 +143,22 @@ export default {
         .then((result) => {
           console.log(result)
           for (const ticket of result) {
-            this.rows.push({ trackingCode: ticket.trackingCode, title: ticket.title, orderId: ticket.orderId, status: ticket.status })
+            this.rows.push({
+              ticketId: ticket._id,
+              trackingCode: ticket.trackingCode,
+              title: ticket.title,
+              orderId: ticket.orderId,
+              status: ticket.status,
+            })
           }
         })
         .catch((error) => {
           console.log(error) // eslint-disable-line
         })
+    },
+    onRowClick(params) {
+      console.log(params)
+      this.$router.push(`/accounts/profile/ticket/ticketpage/?_id=${params.row.ticketId}`)
     },
     rowStyleClassFn(row) {
       return 'row_style'
