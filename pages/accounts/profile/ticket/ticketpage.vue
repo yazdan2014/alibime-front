@@ -55,6 +55,16 @@
                 </ul>
               </div>
               <div class="col-12 col-md-9 info-content">
+                <div>
+                  <h2>تیکت</h2>
+
+                  موضوع: {{ title }} <br />
+                  توضیحات: {{ text }} <br />
+                  وضعیت: {{ status }}
+                  <br />
+                  <hr />
+                  <h2>پاسخ ها</h2>
+                </div>
                 <div v-if="emptyfield == true" class="alert alert-primary">لطفا تمامی فیلد ها را کامل کنید</div>
               </div>
             </div>
@@ -84,7 +94,15 @@ export default {
   middleware: ['check-auth', 'auth'],
   components: {},
   data() {
-    return {}
+    return {
+      emptyfield: false,
+      orderId: '',
+      status: '',
+      title: '',
+      text: '',
+      attachmentsURL: '',
+      id: this.$route.query._id,
+    }
   },
   computed: {
     ...mapGetters({
@@ -103,11 +121,19 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.query._id)
+    console.log(this.$store.state.auth.token)
+    this.getTicket(this.$route.query._id)
   },
   methods: {
-    getTicket(){
-
+    getTicket(_id) {
+      this.$store.dispatch('orders/getTicketbyID', _id).then((result) => {
+        console.log(result)
+        this.orderId = result.orderId
+        this.status = result.status
+        this.text = result.text
+        this.attachmentsURL = result.attachmentsURL
+        this.title = result.title
+      })
     },
     newTicketChat() {
       if (!this.orderId || !this.title || !this.text || !this.attachmentsURL) {

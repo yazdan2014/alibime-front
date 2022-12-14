@@ -26,7 +26,7 @@ const verifyTransaction = 'payment/verify'
 const urlGetPayments = 'payment'
 const urlGetTickets = 'ticket'
 const urlNewTicket = 'ticket'
-const utlGetTicketById = 'ticket'
+const urlGetTicketById = 'ticket'
 const axios = require('axios')
 
 export default ({ app }, inject) => {
@@ -600,6 +600,27 @@ export default ({ app }, inject) => {
             resolve(result)
           })
           .catch(function (error) {
+            reject(app.$mhandler.check(error))
+          })
+      })
+    },
+    getTicketByID(_id) {
+      const url = urlGetTicketById + `/${_id}`
+      console.log(url)
+      return new Promise((resolve, reject) => {
+        app.$axios
+          .create({
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache',
+              'x-access-token': app.store.state.auth.token,
+            },
+          })
+          .$get(url)
+          .then((result) => {
+            resolve(result)
+          })
+          .catch((error) => {
             reject(app.$mhandler.check(error))
           })
       })

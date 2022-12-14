@@ -15,13 +15,27 @@ export default {
         })
     })
   },
+  getTicketbyID(vuexContext, _id) {
+    return new Promise((resolve, reject) => {
+      this.$api
+        .getTicketByID(_id)
+        .then((result) => {
+          const ticket = result
+          vuexContext.commit('getTicketByID', ticket)
+          resolve(result)
+        })
+        .catch((status) => {
+          reject(status)
+        })
+    })
+  },
   getOrderbyID(vuexContext, _id) {
     return new Promise((resolve, reject) => {
       this.$api
         .getOrderbyID(_id)
         .then((result) => {
           const order = result
-          vuexContext.commit('getOrderById', order)
+          vuexContext.commit('getOrderByID', order)
           resolve(result)
         })
         .catch((status) => {

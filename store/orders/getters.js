@@ -7,6 +7,11 @@ export default {
       return item._id === id
     })
   },
+  getTicketById: (state) => (id) => {
+    return state.tickets.find((item) => {
+      return item._id === id
+    })
+  },
   // getOrderById(state) {
   //   return state.orders
   // },

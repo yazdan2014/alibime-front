@@ -10,6 +10,9 @@ export default {
   getOrderById(state, order) {
     state.orders = order
   },
+  getTicketById(state, ticket) {
+    state.tickets = ticket
+  },
   setImageOrder(state, order) {
     state.orders = order
   },
