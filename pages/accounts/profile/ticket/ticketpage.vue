@@ -64,7 +64,24 @@
                   <br />
                   <hr />
                   <h2>پاسخ ها</h2>
+                  <div v-for="answer in answers" v-bind:key="answer._id">
+                    نویسنده: {{ answer.authorId }}
+                    <br />
+                    متن: {{ answer.text }}
+                    <br />
+                    فایل: {{ answer.attachmentsURL }}
+                    <br />
+                    <br />
+                  </div>
+                  <hr />
+                  <h2>پاسخ جدید</h2>
+                  <div>
+                    متن تیکت را وارد کنید:
+                    <textarea v-model="answerText"></textarea>
+                  </div>
+                  <div>فایل ضمیمه: adding soon</div>
                 </div>
+                <button v-on:click="newTicketAnswer()" class="btn btn-success">ثبت</button>
                 <div v-if="emptyfield == true" class="alert alert-primary">لطفا تمامی فیلد ها را کامل کنید</div>
               </div>
             </div>
@@ -100,8 +117,11 @@ export default {
       status: '',
       title: '',
       text: '',
-      attachmentsURL: '',
+      attachmentsURL: 'as dfa asd afsd ',
       id: this.$route.query._id,
+      answers: [],
+      answerText: '',
+      answerFileUrl: '',
     }
   },
   computed: {
@@ -121,13 +141,12 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$store.state.auth.token)
     this.getTicket(this.$route.query._id)
+    this.getTicketAnswers(this.$route.query._id)
   },
   methods: {
     getTicket(_id) {
       this.$store.dispatch('orders/getTicketbyID', _id).then((result) => {
-        console.log(result)
         this.orderId = result.orderId
         this.status = result.status
         this.text = result.text
@@ -135,21 +154,26 @@ export default {
         this.title = result.title
       })
     },
-    newTicketChat() {
-      if (!this.orderId || !this.title || !this.text || !this.attachmentsURL) {
+    getTicketAnswers(ticketId) {
+      this.$store.dispatch('orders/getTicketAnswers', ticketId).then((result) => {
+        console.log(result)
+        this.answers = result
+      })
+    },
+    newTicketAnswer() {
+      if (!this.answerText) {
         this.emptyfield = true
         return
       }
       const data = {
-        orderId: this.orderId,
-        title: this.title,
-        text: this.text,
+        text: this.answerText,
         attachmentsURL: this.attachmentsURL,
+        ticketId: this.id,
       }
-      this.$store.dispatch('orders/newTicket', data).then((result) => {
+      this.$store.dispatch('orders/newTicketAnswer', data).then((result) => {
         if (result.status === 200) {
           console.log('success')
-          this.$router.push('/accounts/profile/tickets')
+          this.$router.go()
         }
       })
     },

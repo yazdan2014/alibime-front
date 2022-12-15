@@ -27,6 +27,9 @@ const urlGetPayments = 'payment'
 const urlGetTickets = 'ticket'
 const urlNewTicket = 'ticket'
 const urlGetTicketById = 'ticket'
+const urlNewTicketAnswer = 'ticketanswers'
+const urlGetTicketAnswers = 'ticketanswers'
+
 const axios = require('axios')
 
 export default ({ app }, inject) => {
@@ -614,6 +617,56 @@ export default ({ app }, inject) => {
               'Content-Type': 'application/json',
               'Cache-Control': 'no-cache',
               'x-access-token': app.store.state.auth.token,
+            },
+          })
+          .$get(url)
+          .then((result) => {
+            resolve(result)
+          })
+          .catch((error) => {
+            reject(app.$mhandler.check(error))
+          })
+      })
+    },
+    newTicketAnswer(data) {
+      const url = String(urlNewTicketAnswer)
+      const body = JSON.stringify({
+        text: data.text,
+        attachmentsURL: data.attachmentsURL,
+        ticketId: data.ticketId,
+      })
+      const config = {
+        method: 'post',
+        url: process.env.API_BASE_URL + '/' + url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+          'X-Access-Token': app.store.state.auth.token,
+        },
+        data: body,
+      }
+      return new Promise((resolve, reject) => {
+        axios(config)
+          .then(function (result) {
+            resolve(result)
+          })
+          .catch(function (error) {
+            reject(app.$mhandler.check(error))
+          })
+      })
+    },
+    getTicketAnswers(ticketid) {
+      const url = urlGetTicketAnswers
+      return new Promise((resolve, reject) => {
+        app.$axios
+          .create({
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache',
+              'x-access-token': app.store.state.auth.token,
+            },
+            params: {
+              ticketId: ticketid,
             },
           })
           .$get(url)

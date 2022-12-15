@@ -29,6 +29,20 @@ export default {
         })
     })
   },
+  getTicketAnswers(vuexContext, ticketId) {
+    return new Promise((resolve, reject) => {
+      this.$api
+        .getTicketAnswers(ticketId)
+        .then((result) => {
+          const ticket = result
+          vuexContext.commit('getTicketAnswers', ticket)
+          resolve(result)
+        })
+        .catch((status) => {
+          reject(status)
+        })
+    })
+  },
   getOrderbyID(vuexContext, _id) {
     return new Promise((resolve, reject) => {
       this.$api
@@ -118,6 +132,19 @@ export default {
         .newTicket(data)
         .then((result) => {
           vuexContext.commit('newTicket', data)
+          resolve(result)
+        })
+        .catch((status) => {
+          reject(status)
+        })
+    })
+  },
+  newTicketAnswer(vuexContext, data) {
+    return new Promise((resolve, reject) => {
+      this.$api
+        .newTicketAnswer(data)
+        .then((result) => {
+          vuexContext.commit('newTicketAnswer', data)
           resolve(result)
         })
         .catch((status) => {
